@@ -2,29 +2,70 @@
   import { ref } from 'vue';
 
   const showModal = ref(false);
+  const newNote = ref('');
+  const errorMessage = ref('');
+  const notes = ref([]);
+
+  function getRandomColor() {
+    const color = 'hsl(' + Math.random() * 360 + ', 100%, 75%)';
+    return color;
+  }
+
+  const addNote = () => {
+    if (newNote.value.replace(/\s/g, '').length >= 10) {
+      notes.value.unshift({
+        id: Math.floor(Math.random() * 1000000) + notes.value.length + 1,
+        text: newNote.value,
+        date: new Date().toLocaleDateString(),
+        backgroundColor: getRandomColor(),
+      });
+      newNote.value = '';
+      showModal.value = false;
+    } else {
+      errorMessage.value = 'Note must be at least 10 characters long';
+    }
+  };
 </script>
 
 <template>
   <main>
     <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea name="note" id="note" cols="30" rows="10"></textarea>
-        <button>Add Note</button>
+        <textarea
+          v-model.trim="newNote"
+          name="note"
+          id="note"
+          cols="30"
+          rows="10"
+        />
+        <p v-if="errorMessage">{{ errorMessage }}</p>
+        <button @click="addNote">Add Note</button>
         <button @click="showModal = false" class="close">Close</button>
       </div>
     </div>
     <div class="container">
       <header>
-        <h1>Notes {{ showModal }}</h1>
+        <h1>Notes</h1>
         <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
-        <div class="card">
+        <!-- <div class="card">
           <p class="main-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
             consequuntur quo quod doloribus iure aliquid!
           </p>
           <p class="date">{{ new Date().toLocaleDateString() }}</p>
+        </div> -->
+        <div
+          v-for="note in notes"
+          :key="note.id"
+          class="card"
+          :style="{ backgroundColor: note.backgroundColor }"
+        >
+          <p class="main-text">
+            {{ note.text }}
+          </p>
+          <p class="date">{{ note.date }}</p>
         </div>
       </div>
     </div>
@@ -125,5 +166,15 @@
   .modal .close {
     background-color: rgb(193, 15, 15);
     margin-top: 7px;
+  }
+
+  .modal p {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  textarea {
+    padding: 10px;
   }
 </style>
