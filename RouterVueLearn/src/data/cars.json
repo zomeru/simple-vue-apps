@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Lamborghini",
+    "price": 1000000,
+    "year": 2019,
+    "contact": {
+      "name": "John 1",
+      "phone": "1234567890"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Bugatti",
+    "price": 1000000,
+    "year": 2015,
+    "contact": {
+      "name": "John 2",
+      "phone": "1234567890"
+    }
+  },
+  {
+    "id": 3,
+    "name": "McLaren",
+    "price": 1000000,
+    "year": 2022,
+    "contact": {
+      "name": "John 3",
+      "phone": "1234567890"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Honda",
+    "price": 1000000,
+    "year": 2019,
+    "contact": {
+      "name": "John 4",
+      "phone": "1234567890"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Toyota",
+    "price": 1000000,
+    "year": 2019,
+    "contact": {
+      "name": "John 5",
+      "phone": "1234567890"
+    }
+  }
+]

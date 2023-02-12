@@ -1,11 +1,13 @@
 <script setup>
-  import { defineProps } from 'vue';
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
 
   const { quiz } = defineProps(['quiz']);
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="router.push(`/quiz/${quiz.id}`)">
     <img :src="quiz.img" alt="" />
     <div class="card-text">
       <h2>{{ quiz.name }}</h2>
@@ -23,6 +25,7 @@
     margin-bottom: 35px;
     margin-right: 20px;
     cursor: pointer;
+    border: none;
   }
 
   .card img {
